@@ -1,12 +1,13 @@
 import api from "./api";
 import TokenService from "./token.service";
 
-const register = (login, password, contactData) => {
+const register = (login, password, contactData, role) => {
     return api
     .post("/auth/register", {
         login,
         contactData,
-        password
+        password,
+        role
     })
         .then(
             (response) => {
@@ -17,6 +18,25 @@ const register = (login, password, contactData) => {
                 return response.data;
             }
         );
+};
+
+const activate = (name, description, start, finish) => {
+    return api
+    .post("/auth/activate", {
+        name,
+        description,
+        start,
+        finish
+    })
+    .then(
+        (response) => {
+            console.log(response.data.accessToken)
+            if (response.data.accessToken) {
+                TokenService.setUser(response.data);
+            }
+            return response.data;
+        }
+    );
 };
 
 const login = (login, password) => {
@@ -46,6 +66,7 @@ const getCurrentUser = () => {
 
 const AuthService = {
     register,
+    activate,
     login,
     logout,
     getCurrentUser,

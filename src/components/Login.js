@@ -4,7 +4,7 @@ import { withRouter } from '../common/with-router';
 import { Link } from "react-router-dom";
 import './reglogstyle.css'
 
-function Login() {
+function Login(props) {
     const [register, setRegister] = useState(() => {
         return {
             username: "",
@@ -32,7 +32,7 @@ function Login() {
             register.password
         ).then(
             () => {
-                this.props.router.navigate("/profile");
+                props.router.navigate("/profile");
                 window.location.reload();
             },
             error => {

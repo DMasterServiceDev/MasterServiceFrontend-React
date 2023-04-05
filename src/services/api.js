@@ -2,7 +2,7 @@ import axios from "axios";
 import TokenService from "./token.service";
 
 const instance = axios.create({
-    baseURL: "http://localhost:9010",
+    baseURL: "http://93.92.200.119:9010",
     headers: {
         "Content-Type": "application/json",
     },
@@ -12,9 +12,13 @@ instance.interceptors.request.use(
     (config) => {
         const token = TokenService.getLocalAccessToken();
         if (token) {
-            console.log(`token: ${token}`);
-            config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
+            // console.log(`token: ${token}`);
+            config.headers["Authorization"] = token;  // for Spring Boot back-end
             // config.headers["x-access-token"] = token; // for Node.js Express back-end
+            if (config.method === 'get' && config.params) {
+                config.url += `?${Object.keys(config.params).map(key => `${key}=${config.params[key]}`).join('&')}`;
+                // console.log(config.url)
+            }
         }
         return config;
     },

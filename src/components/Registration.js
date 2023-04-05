@@ -3,13 +3,16 @@ import validator from 'validator';
 import './reglogstyle.css'
 import AuthService from "../services/auth.service";
 import { Link } from "react-router-dom";
-export default function Registration() {
+import { withRouter } from '../common/with-router';
+
+function Registration(props) {
     const [register, setRegister] = useState(() => {
         return {
             username: "",
             email: "",
             password: "",
             password2: "",
+            role: "ROLE_MASTER",
         }
     })
     const [successful, setSuccesful] = useState(false)
@@ -61,13 +64,13 @@ export default function Registration() {
             AuthService.register(
                 register.username,
                 register.password,
-                register.email
+                register.email,
+                register.role
             ).then(
-                response => {
-                    setMessage(response.data.message)
-                    setSuccesful(true)
-                },
-                error => {
+                () => {
+                    props.router.navigate("/profile");
+                    window.location.reload();
+                },error => {
                     const resMessage =
                         (error.response &&
                             error.response.data &&
@@ -78,7 +81,8 @@ export default function Registration() {
                     setMessage(resMessage)
                     console.log(register.username,
                         register.password,
-                        register.email)
+                        register.email,
+                        register.role)
                 }
             );
         }
@@ -104,6 +108,14 @@ export default function Registration() {
                             </div>
                             <div className='rightregblock'>
                                 <form className='regform'>
+                                    <div className="regdropdown reginput">
+                                        <label> Выберите тип аккаунта:
+                                            <select name="role" value={register.role} onChange={changeInputRegister}>
+                                                <option value="ROLE_MASTER">Мастер</option>
+                                                <option value="ROLE_CUSTOMER">Пользователь</option>
+                                            </select>
+                                        </label>
+                                    </div>
                                     <input className='reginput' placeholder='Логин'
                                         type="username"
                                         id="username"
@@ -146,3 +158,5 @@ export default function Registration() {
         </div>
     )
 }
+
+export default withRouter(Registration);

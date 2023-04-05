@@ -1,44 +1,38 @@
-import React, { Component } from "react";
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import UserService from "../services/user.service";
 
-export default class BoardMaster extends Component {
-    constructor(props) {
-        super(props);
+function BoardMaster() {
+    const [content, setContent] = useState("");
 
-        this.state = {
-            content: ""
-        };
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         UserService.getUserBoard().then(
-            response => {
-                this.setState({
-                    content: response.data
-                });
+            (response) => {
+                setContent(response.data);
             },
-            error => {
-                this.setState({
-                    content:
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString()
-                });
+            (error) => {
+                setContent(
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString()
+                );
             }
         );
-    }
+    }, []);
 
-    render() {
-        return (
-            <div>
-                <header>
-                    <h1>Master board</h1>
-                    <h3>{this.state.content}</h3>
-                </header>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <header>
+                <h1>Master board</h1>
+                <h3>{content}</h3>
+                <Link to={"/calendar"}>
+                    Календарь
+                </Link>
+            </header>
+        </div>
+    );
 }
+
+export default BoardMaster;
