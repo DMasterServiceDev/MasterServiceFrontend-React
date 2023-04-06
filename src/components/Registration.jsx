@@ -108,14 +108,14 @@ function Registration(props) {
                             </div>
                             <div className='rightregblock'>
                                 <form className='regform'>
-                                    <div className="regdropdown reginput">
-                                        <label> Выберите тип аккаунта:
-                                            <select name="role" value={register.role} onChange={changeInputRegister}>
+                                    {/* <div className="reginput regdropdown"> */}
+                                        <label>
+                                            <select  className="reginput regdropdown" name="role" value={register.role} onChange={changeInputRegister}>
                                                 <option value="ROLE_MASTER">Мастер</option>
                                                 <option value="ROLE_CUSTOMER">Пользователь</option>
                                             </select>
                                         </label>
-                                    </div>
+                                    {/* </div> */}
                                     <input className='reginput' placeholder='Логин'
                                         type="username"
                                         id="username"
