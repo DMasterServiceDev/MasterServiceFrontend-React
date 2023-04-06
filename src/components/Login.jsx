@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AuthService from "../services/auth.service";
 import { withRouter } from '../common/with-router';
 import { Link } from "react-router-dom";
-import './reglogstyle.css'
+import './auth.css'
 
 function Login(props) {
     const [register, setRegister] = useState(() => {

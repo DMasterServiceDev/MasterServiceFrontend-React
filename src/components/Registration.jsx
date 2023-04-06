@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import validator from 'validator';
-import './reglogstyle.css'
+import './auth.css'
 import AuthService from "../services/auth.service";
 import { Link } from "react-router-dom";
 import { withRouter } from '../common/with-router';

@@ -57,6 +57,10 @@
   border-style: none;
 }
 
+.regactivationinput {
+  margin-top: 20px;
+}
+
 .rightbtn {
   color: white;
   background-color: rgb(255, 73, 61);
@@ -78,6 +82,13 @@
   margin-top: 20px;
 }
 
+.leftauthbtn {
+  margin-right: 30px;
+  background-color: white;
+  color: rgb(255, 73, 61);
+  border-color: rgb(255, 73, 61);
+}
+
 .activationblock {
   width: 660px;
   height: 340px;
@@ -93,7 +104,9 @@
 }
 
 .activationbtnblock {
-  margin: auto;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (min-width: 561px) {
@@ -153,4 +166,4 @@
     padding-top: 20px;
     padding-bottom: 20px;
   }
-}/*# sourceMappingURL=reglogstyle.css.map */
+}/*# sourceMappingURL=auth.css.map */

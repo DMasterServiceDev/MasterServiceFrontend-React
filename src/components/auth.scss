@@ -46,7 +46,7 @@
 .activationform {
     margin-top: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  
 }
 
 .reginput {
@@ -55,6 +55,10 @@
     margin-top: 8px;
     background-color: rgb(242, 242, 242);
     border-style: none;
+}
+
+.regactivationinput{
+    margin-top: 20px;
 }
 
 .rightbtn {
@@ -77,6 +81,12 @@
     background-color: rgb(255, 73, 61);
     margin-top: 20px;
 }
+.leftauthbtn {
+    margin-right: 30px;
+    background-color: white;
+    color: rgb(255, 73, 61);
+    border-color: rgb(255, 73, 61);
+}
 .activationblock {
     width: 660px;
     height: 340px;
@@ -92,7 +102,10 @@
 }
 
 .activationbtnblock{
-    margin: auto;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    // margin: auto;
 }
 
 @media screen and (min-width: 561px) {

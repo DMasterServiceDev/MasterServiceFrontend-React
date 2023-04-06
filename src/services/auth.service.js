@@ -49,6 +49,8 @@ const login = (login, password) => {
             (response) => {
             console.log(response.data.accessToken)
             if (response.data.accessToken) {
+                const temp = response.data
+                temp[login] = login
                 TokenService.setUser(response.data);
             }
             return response.data;
