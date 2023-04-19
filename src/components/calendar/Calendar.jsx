@@ -92,7 +92,8 @@ export default function Calendar() {
       Promise.all([
         instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: tempday.format('M') } }),
         instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: prevmonth } }),
-        instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: nextmonth } })
+        instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: nextmonth } }),
+        instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: 13 } })
       ]).then(responses => {
         if (responses.length > 0) {
           const data = responses.flatMap(response => response.data)
