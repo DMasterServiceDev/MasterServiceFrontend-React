@@ -365,7 +365,10 @@ export default function Calendar() {
       </div>
       <CalendarPattern
         patternDays={patternDays}
-        setPatternDays={setPatternDays} />
+        setPatternDays={setPatternDays}
+        daysArray={daysArray} 
+        setIsRed={setIsRed}
+        isRed={isRed}/>
       <Day
         selectedDay={selectedDay}
       />

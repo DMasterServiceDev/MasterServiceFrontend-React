@@ -3,7 +3,6 @@ import instance from '../../services/api'
 
 export default function Monitor({ prevMonth, nextMonth, goToday, tempday}) {
     const [monthActive, setMonthActive] = useState('')
-    const [montthCh, setMontthCh] = useState(false)
     useEffect(() => {
     instance.get('/account/month', { params: { year: tempday.format('YYYY'), month: tempday.format('M') } })
         .then(response => setMonthActive(response.data))}, 
@@ -19,14 +18,14 @@ export default function Monitor({ prevMonth, nextMonth, goToday, tempday}) {
             console.error(error); // выводим ошибку в консоль
           });
 
-        console.log(`Month status changed to ${checked}`);
+        // console.log(`Month status changed to ${checked}`);
     }
 
 
-    useEffect(() => {
-        console.log('monthActive:')
-        console.log(monthActive)
-      }, [monthActive])
+    // useEffect(() => {
+    //     console.log('monthActive:')
+    //     console.log(monthActive)
+    //   }, [monthActive])
 
 
     return (
