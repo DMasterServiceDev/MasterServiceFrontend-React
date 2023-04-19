@@ -26,7 +26,6 @@ export default function Calendar() {
   const [ignoreOffDays, setIgnoreOffDays] = useState([])
   const [patternDays, setPatternDays] = useState([])
 
-
   const ignoreOnDaysPost = useRef([]);
   const ignoreOffDaysPost = useRef([]);
   const patternDaysPost = useRef([]);
@@ -131,6 +130,7 @@ export default function Calendar() {
       }).catch(error => {
         console.error(error); // выводим ошибку в консоль
       });
+      
       // до сюда
       setSuccessful(true)
     }
@@ -166,7 +166,7 @@ export default function Calendar() {
       }
     }
   }, [ignoreOffDays, tempday])
-  
+
   useEffect(() => {
     if (ignoreOnDays) {
       for (let i = 0; i < ignoreOnDays.length; i++) {
@@ -244,6 +244,7 @@ export default function Calendar() {
   //   console.log('selectedDay:')
   //   console.log(selectedDay)
   // }, [selectedDay])
+
 
   const getPrevOrNext = (month) => {
     instance.get('/account/pattern', { params: { year: tempday.format('YYYY'), month: month } }).then(responses => {

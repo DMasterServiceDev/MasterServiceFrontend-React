@@ -38,13 +38,15 @@ function App() {
     <div>
       <nav className="navbar">
         <div className="navbar-nav">
-          <li className="nav-item">
+          { showActivate && 
+          (<li className="nav-item">
             <Link to={"/home"} className="nav-link">
               Домашняя странциа
             </Link>
           </li>
+          )}
 
-          {showMasterBoard && (
+          {(showMasterBoard && showActivate) && (
             <li className="nav-item">
               <Link to={"/master"} className="nav-link">
                 Master Board
@@ -52,7 +54,7 @@ function App() {
             </li>
           )}
 
-          {currentUser && (
+          {(showMasterBoard && showActivate) && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
                 User
