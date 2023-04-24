@@ -67,12 +67,13 @@
 
 .rightbtn {
   color: white;
-  background-color: rgb(255, 73, 61);
+  background-color: rgb(245, 110, 110);
   border-radius: 15px;
   width: 128px;
   height: 34px;
   border-style: none;
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .leftbtn {
@@ -82,15 +83,16 @@
   width: 128px;
   height: 34px;
   border: solid 2px;
-  background-color: rgb(255, 73, 61);
+  background-color: rgb(245, 110, 110);
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .leftauthbtn {
   margin-right: 30px;
   background-color: white;
-  color: rgb(255, 73, 61);
-  border-color: rgb(255, 73, 61);
+  color: rgb(245, 110, 110);
+  border-color: rgb(245, 110, 110);
 }
 
 .activationblock {
@@ -132,7 +134,7 @@
   }
   .leftblock {
     width: 50%;
-    background-color: rgb(255, 73, 61);
+    background-color: rgb(245, 110, 110);
     display: flex;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -162,7 +164,7 @@
   }
   .leftblock {
     height: 50%;
-    background-color: rgb(255, 73, 61);
+    background-color: rgb(245, 110, 110);
     display: flex;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;

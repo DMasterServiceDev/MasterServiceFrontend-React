@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import moment from 'moment'
+import moment, { weekdays } from 'moment'
 
 import styled, { keyframes } from 'styled-components'
+// const WeekDaysWrapper = styled.div`
+// display: grid;
+// grid-template-columns: repeat(7, 1fr);
+// // grid-gap: 1px;
+// // border: 1px solid rgb(230, 230, 230);
+// max-width: 500px;
+// `
+
+// const WeekDays = styled.div`
+// min-width: 40px;
+// min-height: 25px;
+// border: 1px solid rgb(230, 230, 230);
+// `
 
 const GridWrapper = styled.div`
     display: grid;
@@ -9,8 +22,8 @@ const GridWrapper = styled.div`
     grid-template-rows: repeat(6, 1fr);
     grid-gap: 1px;
     background-color: rgb(230, 230, 230);
-    max-width: 710px;
     border: 1px solid rgb(230, 230, 230);
+    max-width: 500px;
 `
 const CellWrapper = styled.div.attrs({
     className: 'cellwrapper',
@@ -32,7 +45,7 @@ const DayWrapper = styled.div`
     margin: 10px 10px 10px 10px;
     display: flex;
     
-    background-color: ${props => props.isCurentDay ? 'red' : ''};
+    background-color: ${props => props.isCurentDay ? 'rgb(245, 70, 70)' : ''};
     align-items: center;
     justify-content: center
 `
@@ -45,37 +58,38 @@ export default function CalendarGrid(
     {
         isRed,
         OnClickCell,
-        daysArray
+        daysArray,
+        weekDays
     }) {
 
-return (
-    <div>
-        <GridWrapper>
-            {
-                daysArray.map((dayItem) => (
-                    <CellWrapper onClick={() => {
-                        // OnClickCell(dayItem.day(), +dayItem.format('D'));
-                        OnClickCell(dayItem.day(), dayItem);
-                    }}
-                        key={dayItem.format('DDMMYYYY')}
-                        isWeekend={dayItem.day() === 6 || dayItem.day() === 0}
-                        isDayRed={isRed.includes(dayItem.format('DDMMYYYY'))}
-                    >
-                        <RowCell id={dayItem.format('DDMMYYYY')} flexend>
-                            <DayWrapper
-                                isCurentDay={dayItem.format('DDMMYYYY') === moment().format('DDMMYYYY')}
-                            >
-                                <CurrentDay
-                                    isThisMonth={dayItem.format('M') === daysArray[20].format('M')}
+    return (
+        <div>
+            <GridWrapper>
+                {
+                    daysArray.map((dayItem) => (
+                        <CellWrapper onClick={() => {
+                            // OnClickCell(dayItem.day(), +dayItem.format('D'));
+                            OnClickCell(dayItem.day(), dayItem);
+                        }}
+                            key={dayItem.format('DDMMYYYY')}
+                            isWeekend={dayItem.day() === 6 || dayItem.day() === 0}
+                            isDayRed={isRed.includes(dayItem.format('DDMMYYYY'))}
+                        >
+                            <RowCell id={dayItem.format('DDMMYYYY')} flexend>
+                                <DayWrapper
+                                    isCurentDay={dayItem.format('DDMMYYYY') === moment().format('DDMMYYYY')}
                                 >
-                                    {dayItem.format('D')}
-                                </CurrentDay>
-                            </DayWrapper>
-                        </RowCell>
-                    </CellWrapper>
-                ))
-            }
-        </GridWrapper>
-    </div>
-)
+                                    <CurrentDay
+                                        isThisMonth={dayItem.format('M') === daysArray[20].format('M')}
+                                    >
+                                        {dayItem.format('D')}
+                                    </CurrentDay>
+                                </DayWrapper>
+                            </RowCell>
+                        </CellWrapper>
+                    ))
+                }
+            </GridWrapper>
+        </div>
+    )
 }

@@ -5,7 +5,9 @@ import Monitor from './Monitor'
 import CalendarGrid from './CalendarGrid'
 import InputBlock from './InputBlock'
 import CalendarPattern from './CalendarPattern'
+import WeekDay from './WeekDay'
 import Day from './Day'
+import './styles/Calendar.css'
 import _ from 'lodash';
 import {
   isObjectInArray, parseDate,
@@ -16,7 +18,9 @@ import {
 } from './CalendarFunc'
 import instance from '../../services/api'
 const CalendarBlock = styled.div`
+    padding: 30px;
     display: flex;
+    // background-color: rgb(250, 250, 250);
     // justify-content: space-around;
 `
 
@@ -25,11 +29,9 @@ export default function Calendar() {
   const [ignoreOnDays, setIgnoreOnDays] = useState([])
   const [ignoreOffDays, setIgnoreOffDays] = useState([])
   const [patternDays, setPatternDays] = useState([])
-
   const ignoreOnDaysPost = useRef([]);
   const ignoreOffDaysPost = useRef([]);
   const patternDaysPost = useRef([]);
-
   const [startDateOn, setStartDateOn] = useState(null);
   const [endDateOn, setEndDateOn] = useState(null);
   const [startDateOff, setStartDateOff] = useState(null);
@@ -39,7 +41,7 @@ export default function Calendar() {
   // const [exepOffGet, setExepOffGet] = useState([]);
 
   const [successful, setSuccessful] = useState(false)
-  const [selectedDay, setSelectedDay] = useState(false)
+ 
 
   moment.updateLocale("ru", {
     week: {
@@ -49,7 +51,7 @@ export default function Calendar() {
   });
 
   const [tempday, setTempday] = useState(moment());
-
+  const [selectedDay, setSelectedDay] = useState(tempday.format('DDMMYYYY'))
   // useEffect(() => {
   //   setTempday(moment())
   // }, [])
@@ -57,6 +59,7 @@ export default function Calendar() {
   const startDay = tempday.clone().startOf('month').startOf('week').subtract(1, 'd')
   const day = startDay.clone()
   const daysArray = [...Array(42)].map(() => day.add(1, 'd').clone())
+  const weekDays = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
 
   const prevMonth = () => {
     const prevprevmonth = +tempday.format('M') - 2
@@ -131,7 +134,7 @@ export default function Calendar() {
       }).catch(error => {
         console.error(error); // выводим ошибку в консоль
       });
-      
+
       // до сюда
       setSuccessful(true)
     }
@@ -222,14 +225,14 @@ export default function Calendar() {
   }, [startDateOff, endDateOff])
 
 
-  // useEffect(() => {
-  //   console.log(`isRed:${isRed}`)
-  // }, [isRed])
+  useEffect(() => {
+    console.log(`isRed:${isRed}`)
+  }, [isRed])
 
-  // useEffect(() => {
-  //   console.log('patternDays:')
-  //   console.log(patternDays)
-  // }, [patternDays])
+  useEffect(() => {
+    console.log('patternDays:')
+    console.log(patternDays)
+  }, [patternDays])
 
   // useEffect(() => {
   //   console.log('ignoreOnDays:')
@@ -276,7 +279,7 @@ export default function Calendar() {
       if (selectmode === 1) {
         console.log("Задаем паттерн")
         let arrp = getPatternDays(weekday_, daysArray)
-        setIsRed(prevIsRed => _.uniq(prevIsRed.concat(arrp)));
+        // setIsRed(prevIsRed => _.uniq(prevIsRed.concat(arrp)));
 
         let pattern = {
           year: +tempday.format('YYYY'),
@@ -288,12 +291,11 @@ export default function Calendar() {
         if (!isObjectInArray(patternDays, pattern)) {
           setPatternDays([...patternDays, pattern])
           patternDaysPost.current = [...patternDaysPost.current, pattern]
-        }
-
+        } 
       } else if (selectmode === 2) {
         console.log("Задаем паттерн")
         let arryp = getYearPatternDays(weekday_, daysArray)
-        setIsRed(prevIsRed => _.uniq(prevIsRed.concat(arryp)));
+        // setIsRed(prevIsRed => _.uniq(prevIsRed.concat(arryp)));
 
         let ypattern = {
           year: +tempday.format('YYYY'),
@@ -344,32 +346,49 @@ export default function Calendar() {
 
   return (
     <CalendarBlock>
-      <div>
-        <h2>Календарь</h2>
-        <Monitor
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
-          goToday={goToday}
+        <div className="calendarmain">
+          <div className="monitor">
+            <Monitor
+              prevMonth={prevMonth}
+              nextMonth={nextMonth}
+              goToday={goToday}
+              tempday={tempday}
+            />
+          </div>
+          <div className="calendargrid">
+          <WeekDay 
+          weekDays={weekDays}
+          patternDays={patternDays}
           tempday={tempday}
-        />
-        <CalendarGrid
-          isRed={isRed} setIsRed={setIsRed}
-          OnClickCell={OnClickCell}
+          setPatternDays={setPatternDays}
+          setIsRed={setIsRed}
           daysArray={daysArray}
-        />
-        <InputBlock
-          ResetMonth={ResetMonth}
-          patternDaysPost={patternDaysPost}
-          ignoreOnDaysPost={ignoreOnDaysPost}
-          ignoreOffDaysPost={ignoreOffDaysPost}
-        />
-      </div>
-      <CalendarPattern
-        patternDays={patternDays}
-        setPatternDays={setPatternDays}
-        daysArray={daysArray} 
-        setIsRed={setIsRed}
-        isRed={isRed}/>
+          setSuccessful={setSuccessful}
+          />
+            <CalendarGrid
+              isRed={isRed} setIsRed={setIsRed}
+              OnClickCell={OnClickCell}
+              daysArray={daysArray}  
+            />
+          </div>
+          <div className="inputblock">
+            <InputBlock
+              ResetMonth={ResetMonth}
+              patternDaysPost={patternDaysPost}
+              ignoreOnDaysPost={ignoreOnDaysPost}
+              ignoreOffDaysPost={ignoreOffDaysPost}
+            />
+          </div>
+        </div>
+        <div className="calendarpattern">
+          <CalendarPattern
+            patternDays={patternDays}
+            setPatternDays={setPatternDays}
+            daysArray={daysArray}
+            setIsRed={setIsRed}
+            isRed={isRed} 
+            setSuccessful={setSuccessful}/>
+        </div>
       <Day
         selectedDay={selectedDay}
       />
