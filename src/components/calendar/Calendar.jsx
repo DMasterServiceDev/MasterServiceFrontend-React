@@ -41,7 +41,7 @@ export default function Calendar() {
   // const [exepOffGet, setExepOffGet] = useState([]);
 
   const [successful, setSuccessful] = useState(false)
- 
+
 
   moment.updateLocale("ru", {
     week: {
@@ -291,7 +291,7 @@ export default function Calendar() {
         if (!isObjectInArray(patternDays, pattern)) {
           setPatternDays([...patternDays, pattern])
           patternDaysPost.current = [...patternDaysPost.current, pattern]
-        } 
+        }
       } else if (selectmode === 2) {
         console.log("Задаем паттерн")
         let arryp = getYearPatternDays(weekday_, daysArray)
@@ -346,52 +346,54 @@ export default function Calendar() {
 
   return (
     <CalendarBlock>
-        <div className="calendarmain">
-          <div className="monitor">
-            <Monitor
-              prevMonth={prevMonth}
-              nextMonth={nextMonth}
-              goToday={goToday}
-              tempday={tempday}
-            />
-          </div>
-          <div className="calendargrid">
-          <WeekDay 
-          weekDays={weekDays}
-          patternDays={patternDays}
-          tempday={tempday}
-          setPatternDays={setPatternDays}
-          setIsRed={setIsRed}
-          daysArray={daysArray}
-          setSuccessful={setSuccessful}
+      <div className="calendarmain">
+        <div className="monitor">
+          <Monitor
+            prevMonth={prevMonth}
+            nextMonth={nextMonth}
+            goToday={goToday}
+            tempday={tempday}
           />
-            <CalendarGrid
-              isRed={isRed} setIsRed={setIsRed}
-              OnClickCell={OnClickCell}
-              daysArray={daysArray}  
-            />
-          </div>
-          <div className="inputblock">
-            <InputBlock
-              ResetMonth={ResetMonth}
-              patternDaysPost={patternDaysPost}
-              ignoreOnDaysPost={ignoreOnDaysPost}
-              ignoreOffDaysPost={ignoreOffDaysPost}
-            />
-          </div>
         </div>
-        <div className="calendarpattern">
-          <CalendarPattern
+        <div className="calendargrid">
+          <WeekDay
+            weekDays={weekDays}
             patternDays={patternDays}
+            tempday={tempday}
             setPatternDays={setPatternDays}
-            daysArray={daysArray}
             setIsRed={setIsRed}
-            isRed={isRed} 
-            setSuccessful={setSuccessful}/>
+            daysArray={daysArray}
+            setSuccessful={setSuccessful}
+          />
+          <CalendarGrid
+            isRed={isRed} setIsRed={setIsRed}
+            OnClickCell={OnClickCell}
+            daysArray={daysArray}
+          />
         </div>
-      <Day
-        selectedDay={selectedDay}
-      />
+        <div className="inputblock">
+          <InputBlock
+            ResetMonth={ResetMonth}
+            patternDaysPost={patternDaysPost}
+            ignoreOnDaysPost={ignoreOnDaysPost}
+            ignoreOffDaysPost={ignoreOffDaysPost}
+          />
+        </div>
+      </div>
+      <div className="calendarpattern">
+        <CalendarPattern
+          patternDays={patternDays}
+          setPatternDays={setPatternDays}
+          daysArray={daysArray}
+          setIsRed={setIsRed}
+          isRed={isRed}
+          setSuccessful={setSuccessful} />
+      </div>
+      <div className="day">
+        <Day
+          selectedDay={selectedDay}
+        />
+      </div>
     </CalendarBlock>
   )
 }

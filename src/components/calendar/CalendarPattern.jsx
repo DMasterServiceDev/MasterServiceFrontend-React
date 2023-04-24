@@ -31,13 +31,13 @@ export default function CalendarPattern({ patternDays,
 
     return (
       <div>
-        <h2 className='patternheader'>Список паттернов</h2>
+        <h2 className='patternheader secondcolor'>Список выходных</h2>
         <div className='patternblock'>
-          <ul className="patternlist">
+          <ul className="patternlist primecolor">
             {patternDays.map((item, index) => (
               <div className="patternitemblock" key={index}>
-                <li>{JSON.stringify(formatDate(item))}
-                  <svg id={index} className='cross' fill="#000000" width="8px" height="8px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" onClick={deletePattern}>
+                <li>{formatDate(item)}
+                  <svg id={index} className='cross' fill="rgb(245, 110, 110)" width="9px" height="9px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" onClick={deletePattern}>
                     <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fillRule="evenodd" />
                   </svg>
                 </li>

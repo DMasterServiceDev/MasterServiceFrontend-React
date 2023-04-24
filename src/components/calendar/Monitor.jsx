@@ -45,7 +45,7 @@ export default function Monitor({ prevMonth, nextMonth, goToday, tempday }) {
 
   return (
     <div className='monitorblock'>
-      <h2 className='monitorheader'>{tempday.format('MMMM')} {tempday.format('YYYY')}</h2>
+      <h2 className='monitorheader secondcolor'>{tempday.format('MMMM')} {tempday.format('YYYY')}</h2>
       <div className="monitorbtnblock">
         <input type="checkbox" id="btn-checkbox" className="btn-checkbox" onClick={MonthStatusChange} checked={monthActive} />
         <label htmlFor="btn-checkbox" className="btn-label" style={buttonStyle}>{buttonText}</label>

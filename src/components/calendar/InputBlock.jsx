@@ -48,16 +48,16 @@ export default function InputBlock({ ResetMonth, patternDaysPost, ignoreOnDaysPo
         <InputDiv>
             <RadioBlock>
                 <SelectDiv>
-                    <p className='inputtext'>Выходные на месяц</p>
+                    <p className='inputtext primecolor'>Выходные на месяц</p>
                     <input name='selectignore'
-                        className='selectignore'
+                        className='selectignore '
                         type="radio"
                         id="radioButton"
                         value={1}
                         onClick={uncheckRadioButtons} />
                 </SelectDiv>
                 <SelectDiv>
-                    <p className='inputtext'>Выходные на год</p>
+                    <p className='inputtext primecolor'>Выходные на год</p>
                     <input name='selectignore'
                         className='selectignore'
                         type="radio"
@@ -67,7 +67,7 @@ export default function InputBlock({ ResetMonth, patternDaysPost, ignoreOnDaysPo
                     />
                 </SelectDiv>
                 <SelectDiv>
-                    <p className='inputtext'>Рабоичие</p>
+                    <p className='inputtext primecolor'>Рабоичие</p>
                     <input name='selectignore'
                         className='selectignore'
                         type="radio"
@@ -77,8 +77,8 @@ export default function InputBlock({ ResetMonth, patternDaysPost, ignoreOnDaysPo
                     />
                 </SelectDiv>
                 <SelectDiv>
-                    <p className='inputtext'>Выходные</p>
-                    <input name='selectignore'
+                    <p className='inputtext primecolor'>Выходные</p>
+                    <input name='selectignore '
                         className='selectignore'
                         type="radio"
                         id="radioButton4"
